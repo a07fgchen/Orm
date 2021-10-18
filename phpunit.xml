@@ -1,0 +1,23 @@
+<?php version="1.0" encoding="UTF-8"?>
+
+
+<phpunit  stderr="true" processIsolation="true" colors="true" beStrictAboutTestsThatDoNotTestAnything="false">
+    <testsuites>
+        <testsuite name="simple test">
+            <directory>./test</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">src/</directory>
+        </whitelist>
+    </filter>
+    <php>
+        <ini name="date.timezone" value="UTC"/>
+        <const name="PHPUNIT_TEST" value="TRUE"/>
+    </php>
+    <logging>
+        <log type="coverage-clover" target="clover.xml"/>
+        <log type="coverage-html" target="test/report"/>
+    </logging>
+</phpunit>
