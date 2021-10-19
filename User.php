@@ -11,10 +11,5 @@ class User extends Model
     protected $table = "users";
 }
 
-User::setDb(new MysqliDriver());
-$user = new User([
-    'firstname'=>'john',
-    'lastname' => 'Doe'
-]);
 
 

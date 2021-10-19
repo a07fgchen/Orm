@@ -20,7 +20,7 @@ class Model
 
     public function __construct($data)
     {
-        $this->data = [];
+        $this->data = $data;
     }
 
     public function save()

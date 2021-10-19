@@ -97,3 +97,7 @@ class Magic implements ArrayAccess,Countable,IteratorAggregate,JsonSerializable
         return $this->data;
     }
 }
+
+$magic = new Magic(['foo'=>'bar']);
+
+var_dump($magic);
