@@ -26,12 +26,13 @@ abstract class Database
     public function insert($table,array $bind)
     {
         $cols = [];
-        $vals = [];
-
-        $sql = "INSERT INTO"
+        $cols = array_keys($bind);
+ 
+        $sql = "INSERT INTO FROM "
             . $this->quteIdentifier($table)
-            . ' ('. implode(', ', $cols) . ')';
-
+            . ' ('. implode(', ', $cols) . ')'
+            . ' ('. implode(', ', $bind) . ')';
+      
         return $this->query($sql,$bind);
     }
 
