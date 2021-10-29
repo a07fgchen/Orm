@@ -24,13 +24,16 @@ class MysqliDriver extends Database
     {
         $binds = [];
         $types = str_pad('', count($values), 's');
-        // var_dump($values);
-        // die;
+        
         $binds[] = &$types;
         foreach ($values as $key => $value) {
             $binds[] = &$values[$key];
         }
-        var_dump($binds);
-        die;
+       
+        $stmn = $this->conn->prepare($sql);
+        call_user_func_array([$stmn,'bind_param'],$binds);
+        var_dump($sql,$binds);
+        $stmn->execute();
+        $stmn->close(); 
     }
 }

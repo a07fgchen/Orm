@@ -10,7 +10,6 @@ abstract class Database
     }
 
     abstract public function connect();
-
     /**
      * @param $sql
      * @param $values
@@ -26,12 +25,19 @@ abstract class Database
     public function insert($table,array $bind)
     {
         $cols = [];
-        $cols = array_keys($bind);
- 
-        $sql = "INSERT INTO FROM "
+        $vals = [];
+
+        foreach($bind as $col => $val )
+        {
+            $cols[] = $this->quteIdentifier($col);
+            $vals[] = "'?'";
+        }
+
+        $sql = "INSERT INTO "
             . $this->quteIdentifier($table)
-            . ' ('. implode(', ', $cols) . ')'
-            . ' ('. implode(', ', $bind) . ')';
+            . ' ('. implode(', ', $cols) . ') '
+            .'VALUES'
+            . ' ('. implode(', ', $vals) . ') ';
       
         return $this->query($sql,$bind);
     }
