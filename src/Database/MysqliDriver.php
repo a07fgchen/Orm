@@ -11,7 +11,7 @@ class MysqliDriver extends Database
     public function connect()
     {
         $this->conn = new mysqli(
-            'localhost', 'root', '', 'laravel'
+            'localhost', 'root', '', 'test'
         );
     }
 
@@ -24,15 +24,12 @@ class MysqliDriver extends Database
     {
         $binds = [];
         $types = str_pad('', count($values), 's');
-        
         $binds[] = &$types;
         foreach ($values as $key => $value) {
             $binds[] = &$values[$key];
         }
-       
-        $stmn = $this->conn->prepare($sql);
-        call_user_func_array([$stmn,'bind_param'],$binds);
-        var_dump($sql,$binds);
+        $stmn = $this->conn->prepare($sql);   
+        $stmn->bind_param(...$binds);
         $stmn->execute();
         $stmn->close(); 
     }

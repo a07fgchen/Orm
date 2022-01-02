@@ -22,24 +22,22 @@ abstract class Database
         return $col;
     }
 
-    public function insert($table,array $bind)
+    public function insert($table,array $binds)
     {
         $cols = [];
         $vals = [];
 
-        foreach($bind as $col => $val )
+        foreach($binds as $col => $val )
         {
             $cols[] = $this->quteIdentifier($col);
-            $vals[] = "'?'";
+            $vals[] = "?";
         }
-
         $sql = "INSERT INTO "
             . $this->quteIdentifier($table)
             . ' ('. implode(', ', $cols) . ') '
-            .'VALUES'
-            . ' ('. implode(', ', $vals) . ') ';
+            .'VALUES ('. implode(', ', $vals) . ') ';
       
-        return $this->query($sql,$bind);
+        return $this->query($sql,$binds);
     }
 
 }
